@@ -9,6 +9,7 @@ function  Main(props)  {
     const [userName, setUserName] = React.useState('');
     const [userDescription, setUserDescription] = React.useState('');
     const [userAvatar, setUserAvatar] = React.useState('');
+    const [cards, setCards] = React.useState([]);
 
     React.useEffect(() => {
         api.getProfile()
@@ -23,9 +24,7 @@ function  Main(props)  {
             setUserAvatar(data.avatar)
         })
             .catch((err) => console.log(err))
-    }, [userName, userDescription, userAvatar])
-
-    const [cards, setCards] = React.useState([]);
+    }, [])
 
     React.useEffect(() => {
         api.getInitialCards()
@@ -40,7 +39,7 @@ function  Main(props)  {
             <section className="profile">
                 <div className="profile__info">
                     <div className="profile__avatar">
-                        <img className="profile__avatar-img" src={userAvatar} alt="Аватар" />
+                        {userAvatar && (<img className="profile__avatar-img" src={userAvatar} alt="Аватар" />)}
                         <button type="button" className="profile__avatar-edit" onClick={props.onEditAvatar}/>
                     </div>
                     <h1 className="profile__username">{userName}</h1>
