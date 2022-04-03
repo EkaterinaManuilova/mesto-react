@@ -105,7 +105,7 @@ function App() {
                     <span className="form__input-error avatar-input-error" id="avatar-input-error" />
                 </label>
             </PopupWithForm>
-            
+
             <PopupWithForm
                 name="confirm"
                 title='Вы уверены?'

@@ -4,7 +4,7 @@ import addImage from "../images/add-image.svg";
 import api from "../utils/api";
 import Card from "./Card";
 
-function  Main(props)  {
+function  Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick})  {
 
     const [userName, setUserName] = React.useState('');
     const [userDescription, setUserDescription] = React.useState('');
@@ -40,14 +40,14 @@ function  Main(props)  {
                 <div className="profile__info">
                     <div className="profile__avatar">
                         {userAvatar && (<img className="profile__avatar-img" src={userAvatar} alt="Аватар" />)}
-                        <button type="button" className="profile__avatar-edit" onClick={props.onEditAvatar}/>
+                        <button type="button" className="profile__avatar-edit" onClick={onEditAvatar}/>
                     </div>
                     <h1 className="profile__username">{userName}</h1>
                     <p className="profile__job">{userDescription}</p>
-                    <button className="button button_type_edit" type="button" onClick={props.onEditProfile}>
+                    <button className="button button_type_edit" type="button" onClick={onEditProfile}>
                         <img className="button__edit-image" src={editImage} alt="Карандаш" />
                     </button>
-                    <button className="button button_type_add" type="button" onClick={props.onAddPlace}>
+                    <button className="button button_type_add" type="button" onClick={onAddPlace}>
                         <img className="button__add-image" src={addImage} alt="Плюс" />
                     </button>
                 </div>
@@ -58,7 +58,7 @@ function  Main(props)  {
                         <Card
                         key={card._id}
                         card={card}
-                        onCardClick={props.onCardClick}
+                        onCardClick={onCardClick}
                         />
                     )}
                 </ul>
