@@ -62,16 +62,14 @@ function App() {
                 isOpen={isEditProfilePopupOpen}
                 onClose={closeAllPopups}
             >
-                <>
-                    <label className="form__field">
-                        <input className="form__input form__input_name_username" type="text" placeholder="Имя" name="username" id="username-input" required minLength={2} maxLength={40} />
-                        <span className="form__input-error username-input-error" id="username-input-error" />
-                    </label>
-                    <label className="form__field">
-                        <input className="form__input form__input_name_profession" type="text" placeholder="О себе" name="profession" id="profession-input" required minLength={2} maxLength={200} />
-                        <span className="form__input-error profession-input-error" id="profession-input-error" />
-                    </label>
-                </>
+                <label className="form__field">
+                    <input className="form__input form__input_name_username" type="text" placeholder="Имя" name="username" id="username-input" required minLength={2} maxLength={40} />
+                    <span className="form__input-error username-input-error" id="username-input-error" />
+                </label>
+                <label className="form__field">
+                    <input className="form__input form__input_name_profession" type="text" placeholder="О себе" name="profession" id="profession-input" required minLength={2} maxLength={200} />
+                    <span className="form__input-error profession-input-error" id="profession-input-error" />
+                </label>
             </PopupWithForm>
 
             <PopupWithForm
@@ -81,16 +79,14 @@ function App() {
                 isOpen={isAddPlacePopupOpen}
                 onClose={closeAllPopups}
             >
-                <>
-                    <label className="form__field">
-                        <input className="form__input form__input_name_title" type="text" placeholder="Название" name="name" id="title-input" required minLength={2} maxLength={30} />
-                        <span className="form__input-error title-input-error" id="title-input-error" />
-                    </label>
-                    <label className="form__field">
-                        <input className="form__input form__input_name_url" type="url" placeholder="Ссылка на картинку" name="link" id="url-input" required />
-                        <span className="form__input-error url-input-error" id="url-input-error" />
-                    </label>
-                </>
+                <label className="form__field">
+                    <input className="form__input form__input_name_title" type="text" placeholder="Название" name="name" id="title-input" required minLength={2} maxLength={30} />
+                    <span className="form__input-error title-input-error" id="title-input-error" />
+                </label>
+                <label className="form__field">
+                    <input className="form__input form__input_name_url" type="url" placeholder="Ссылка на картинку" name="link" id="url-input" required />
+                    <span className="form__input-error url-input-error" id="url-input-error" />
+                </label>
             </PopupWithForm>
 
             <PopupWithForm
