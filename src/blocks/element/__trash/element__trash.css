@@ -14,3 +14,7 @@
     opacity: .6;
     transition: opacity .5s linear;
 }
+
+.element__trash_hidden {
+    display: none;
+}
