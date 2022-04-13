@@ -64,6 +64,13 @@ class Api {
         })
             .then(this._getResponseData)
     }
+    changeLikeCardStatus(id, cardLikeStatus) {
+        return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+            method: cardLikeStatus ? 'PUT' : 'DELETE',
+            headers: this._headers
+        })
+            .then(this._getResponseData)
+    }
     updateAvatar(avatar) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
