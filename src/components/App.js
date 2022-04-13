@@ -9,6 +9,7 @@ import PopupWithForm from "./PopupWithForm";
 import api from "../utils/api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function App() {
 
@@ -52,6 +53,15 @@ function App() {
         api.updateProfile(data).then(
             profileData => {
                 setCurrentUser(profileData);
+                closeAllPopups();
+            })
+            .catch((err) => console.log(err))
+    }
+
+    function handleUpdateAvatar(data) {
+        api.updateAvatar(data).then(
+            avatarData => {
+                setCurrentUser(avatarData);
                 closeAllPopups();
             })
             .catch((err) => console.log(err))
@@ -103,18 +113,8 @@ function App() {
                 </label>
             </PopupWithForm>
 
-            <PopupWithForm
-                name="avatar"
-                title='Обновить аватар'
-                textBtn='Да'
-                isOpen={isEditAvatarPopupOpen}
-                onClose={closeAllPopups}
-            >
-                <label className="form__field">
-                    <input className="form__input form__input_name_avatar" type="url" placeholder="Ссылка на новый аватар" name="avatar" id="avatar-input" required />
-                    <span className="form__input-error avatar-input-error" id="avatar-input-error" />
-                </label>
-            </PopupWithForm>
+            <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
+
 
             <PopupWithForm
                 name="confirm"
