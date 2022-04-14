@@ -7,31 +7,7 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function  Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCardLike, onCardDelete})  {
 
-    // const [userName, setUserName] = React.useState('');
-    // const [userDescription, setUserDescription] = React.useState('');
-    // const [userAvatar, setUserAvatar] = React.useState('');
-
-
     const currentUser = React.useContext(CurrentUserContext);
-
-
-
-    // React.useEffect(() => {
-    //     api.getProfile()
-    //         .then(res => {
-    //             const data = {
-    //                 name: res.name,
-    //                 about: res.about,
-    //                 avatar: res.avatar
-    //             }
-    //         setUserName(data.name);
-    //         setUserDescription(data.about);
-    //         setUserAvatar(data.avatar)
-    //     })
-    //         .catch((err) => console.log(err))
-    // }, [])
-
-
 
     return(
         <main>
@@ -57,7 +33,6 @@ function  Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onC
                         <Card
                         key={card._id}
                         card={card}
-
                         onCardClick={onCardClick}
                         onCardLike={onCardLike}
                         onCardDelete={onCardDelete}
