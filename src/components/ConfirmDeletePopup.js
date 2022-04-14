@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 
-function ConfirmDeletePopup(isOpen, onClose) {
+function ConfirmDeletePopup({isOpen, onClose}) {
     return (
         <PopupWithForm
             name="confirm"

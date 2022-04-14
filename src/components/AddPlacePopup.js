@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup(isOpen, onClose, onAddCard) {
+function AddPlacePopup({isOpen, onClose, onAddCard}) {
 
     const [name, setName] = React.useState('');
     const [link, setLink] = React.useState('');
@@ -9,7 +9,7 @@ function AddPlacePopup(isOpen, onClose, onAddCard) {
     React.useEffect(() => {
         setName('');
         setLink('');
-    }, [])
+    }, [isOpen])
 
     function handleNameChange(e) {
         setName(e.target.value);
@@ -22,6 +22,7 @@ function AddPlacePopup(isOpen, onClose, onAddCard) {
         e.preventDefault();
         onAddCard({name, link});
     }
+
     return(
         <PopupWithForm
             name="add"
