@@ -23,7 +23,13 @@ function App() {
     React.useEffect(() => {
         Promise.all([api.getProfile(), api.getInitialCards()])
             .then(([profileData, cardsData]) => {
-                setCurrentUser(profileData);
+                const data= {
+                    name: profileData.name,
+                    about: profileData.about,
+                    avatar: profileData.avatar,
+                    _id: profileData._id
+                }
+                setCurrentUser(data);
                 setCards(cardsData);
             })
             .catch((err) => console.log(err))
