@@ -4,15 +4,14 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
 
+    const currentUser = React.useContext(CurrentUserContext);
     const [name, setName] = React.useState('');
     const [description, setDescription] = React.useState('');
-
-    const currentUser = React.useContext(CurrentUserContext);
 
     React.useEffect(() => {
         setName(currentUser.name);
         setDescription(currentUser.about);
-    }, [currentUser]);
+    }, [isOpen]);
 
     function handleNameChange(e) {
         setName(e.target.value);
@@ -38,11 +37,15 @@ return (
         onSubmit={handleSubmit}
     >
         <label className="form__field">
-            <input className="form__input form__input_name_username" type="text" placeholder="Имя" name="username" id="username-input" required minLength={2} maxLength={40} value={name || ''} onChange={handleNameChange} />
+            <input className="form__input form__input_name_username" type="text"
+                   placeholder="Имя" name="username" id="username-input" required
+                   minLength={2} maxLength={40} value={name || ''} onChange={handleNameChange} />
             <span className="form__input-error username-input-error" id="username-input-error" />
         </label>
         <label className="form__field">
-            <input className="form__input form__input_name_profession" type="text" placeholder="О себе" name="profession" id="profession-input" required minLength={2} maxLength={200} value={description ||''} onChange={handleDescriptionChange} />
+            <input className="form__input form__input_name_profession" type="text"
+                   placeholder="О себе" name="profession" id="profession-input" required
+                   minLength={2} maxLength={200} value={description ||''} onChange={handleDescriptionChange} />
             <span className="form__input-error profession-input-error" id="profession-input-error" />
         </label>
     </PopupWithForm>

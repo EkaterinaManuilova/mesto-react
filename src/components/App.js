@@ -1,16 +1,14 @@
-import React from 'react';
-import {useState} from "react";
-import '../index.css';
+import React, {useState} from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import ImagePopup from "./ImagePopup";
-import api from "../utils/api";
-import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ConfirmDeletePopup from "./ConfirmDeletePopup";
+import {CurrentUserContext} from "../contexts/CurrentUserContext";
+import api from "../utils/api";
 
 function App() {
 
@@ -23,22 +21,9 @@ function App() {
     const [cards, setCards] = React.useState([]);
 
     React.useEffect(() => {
-        api.getProfile()
-            .then(res => {
-                const data = {
-                    name: res.name,
-                    about: res.about,
-                    avatar: res.avatar,
-                    _id: res._id
-                }
-                setCurrentUser(data);
-            })
-            .catch((err) => console.log(err))
-    }, [])
-
-    React.useEffect(() => {
-        api.getInitialCards()
-            .then(cardsData =>  {
+        Promise.all([api.getProfile(), api.getInitialCards()])
+            .then(([profileData, cardsData]) => {
+                setCurrentUser(profileData);
                 setCards(cardsData);
             })
             .catch((err) => console.log(err))
@@ -135,15 +120,33 @@ function App() {
 
                 <Footer />
 
-                <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+                <ImagePopup
+                    card={selectedCard}
+                    onClose={closeAllPopups}
+                />
 
-                <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
+                <EditProfilePopup
+                    isOpen={isEditProfilePopupOpen}
+                    onClose={closeAllPopups}
+                    onUpdateUser={handleUpdateUser}
+                />
 
-                <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
+                <EditAvatarPopup
+                    isOpen={isEditAvatarPopupOpen}
+                    onClose={closeAllPopups}
+                    onUpdateAvatar={handleUpdateAvatar}
+                />
 
-                <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddCard={handleAddPlaceSubmit} />
+                <AddPlacePopup
+                    isOpen={isAddPlacePopupOpen}
+                    onClose={closeAllPopups}
+                    onAddCard={handleAddPlaceSubmit}
+                />
 
-                <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} onClose={closeAllPopups} />
+                <ConfirmDeletePopup
+                    isOpen={isConfirmDeletePopupOpen}
+                    onClose={closeAllPopups}
+                />
 
             </div>
 
