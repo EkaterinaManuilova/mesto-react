@@ -5,13 +5,15 @@ import addImage from "../images/add-image.svg";
 import Card from "./Card";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
-function  Main({onEditAvatar,
+function  Main({
+                   onEditAvatar,
                    onEditProfile,
                    onAddPlace,
                    onCardClick,
                    cards,
                    onCardLike,
-                   onCardDelete})  {
+                   onCardDelete
+})  {
 
     const currentUser = React.useContext(CurrentUserContext);
 
