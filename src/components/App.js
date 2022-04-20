@@ -19,6 +19,7 @@ function App() {
     const [selectedCard, setSelectedCard] = useState({});
     const [currentUser, setCurrentUser] = useState({});
     const [cards, setCards] = React.useState([]);
+    const [cardSelectedForDelete, setCardSelectedForDelete] = React.useState({});
 
     React.useEffect(() => {
         Promise.all([api.getProfile(), api.getInitialCards()])
@@ -47,7 +48,8 @@ function App() {
         setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
     }
 
-    function handleConfirmDeleteClick() {
+    function handleConfirmDeleteClick(card) {
+        setCardSelectedForDelete(card);
         setIsConfirmDeletePopupOpen(!isConfirmDeletePopupOpen);
     }
 
@@ -83,9 +85,9 @@ function App() {
     }
 
     function handleCardDelete(card) {
-
         api.deleteCard(card._id).then(() => {
             setCards((state) => state.filter((c) => c._id !== card._id));
+            closeAllPopups();
         })
             .catch((err) => console.log(err))
     }
@@ -104,6 +106,7 @@ function App() {
         setIsAddPlacePopupOpen(false);
         setIsConfirmDeletePopupOpen(false);
         setSelectedCard({});
+        setCardSelectedForDelete({});
     }
 
     return (
@@ -152,6 +155,8 @@ function App() {
                 <ConfirmDeletePopup
                     isOpen={isConfirmDeletePopupOpen}
                     onClose={closeAllPopups}
+                    card={cardSelectedForDelete}
+                    onCardDelete={handleCardDelete}
                 />
 
             </div>
