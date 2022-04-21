@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup({isOpen, onClose, onAddCard}) {
+function AddPlacePopup({isOpen, onClose, onAddCard, isLoading}) {
 
     const [name, setName] = React.useState('');
     const [link, setLink] = React.useState('');
@@ -28,9 +28,11 @@ function AddPlacePopup({isOpen, onClose, onAddCard}) {
             name="add"
             title='Новое место'
             textBtn='Создать'
+            loadingTextBtn='Сохранение...'
             isOpen={isOpen}
             onClose={onClose}
             onSubmit={handleSubmit}
+            isLoading={isLoading}
         >
             <label className="form__field">
                 <input className="form__input form__input_name_title" type="text" placeholder="Название" name="name" id="title-input" required minLength={2} maxLength={30} value={name || ''} onChange={handleNameChange} />

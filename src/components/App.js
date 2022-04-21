@@ -16,6 +16,7 @@ function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
     const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [selectedCard, setSelectedCard] = useState({});
     const [currentUser, setCurrentUser] = useState({});
     const [cards, setCards] = React.useState([]);
@@ -58,21 +59,29 @@ function App() {
     }
 
     function handleUpdateUser(data) {
+        setIsLoading(true);
         api.updateProfile(data).then(
             profileData => {
                 setCurrentUser(profileData);
                 closeAllPopups();
             })
             .catch((err) => console.log(err))
+            .finally(() => {
+                setIsLoading(false);
+            })
     }
 
     function handleUpdateAvatar(data) {
+        setIsLoading(true);
         api.updateAvatar(data).then(
             avatarData => {
                 setCurrentUser(avatarData);
                 closeAllPopups();
             })
             .catch((err) => console.log(err))
+            .finally(() => {
+                setIsLoading(false);
+            })
     }
 
     function handleCardLike(card) {
@@ -85,19 +94,27 @@ function App() {
     }
 
     function handleCardDelete(card) {
+        setIsLoading(true);
         api.deleteCard(card._id).then(() => {
             setCards((state) => state.filter((c) => c._id !== card._id));
             closeAllPopups();
         })
             .catch((err) => console.log(err))
+            .finally(() => {
+                setIsLoading(false);
+            })
     }
 
     function handleAddPlaceSubmit(data) {
+        setIsLoading(true);
         api.addCard(data).then(newCard => {
             setCards([newCard, ...cards]);
             closeAllPopups();
         })
             .catch((err) => console.log(err))
+            .finally(() => {
+                setIsLoading(false);
+            })
     }
 
     function closeAllPopups() {
@@ -138,18 +155,21 @@ function App() {
                     isOpen={isEditProfilePopupOpen}
                     onClose={closeAllPopups}
                     onUpdateUser={handleUpdateUser}
+                    isLoading={isLoading}
                 />
 
                 <EditAvatarPopup
                     isOpen={isEditAvatarPopupOpen}
                     onClose={closeAllPopups}
                     onUpdateAvatar={handleUpdateAvatar}
+                    isLoading={isLoading}
                 />
 
                 <AddPlacePopup
                     isOpen={isAddPlacePopupOpen}
                     onClose={closeAllPopups}
                     onAddCard={handleAddPlaceSubmit}
+                    isLoading={isLoading}
                 />
 
                 <ConfirmDeletePopup
@@ -157,6 +177,7 @@ function App() {
                     onClose={closeAllPopups}
                     card={cardSelectedForDelete}
                     onCardDelete={handleCardDelete}
+                    isLoading={isLoading}
                 />
 
             </div>
