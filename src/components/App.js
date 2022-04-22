@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -125,6 +125,18 @@ function App() {
         setSelectedCard({});
         setCardSelectedForDelete({});
     }
+
+    const escCloseFunction = useCallback((event) => {
+        if (event.key === "Escape") {
+            closeAllPopups()
+        }
+    }, []);
+    useEffect(() => {
+        document.addEventListener("keydown", escCloseFunction, false);
+        return () => {
+            document.removeEventListener("keydown", escCloseFunction, false);
+        };
+    }, []);
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
