@@ -131,6 +131,7 @@ function App() {
             closeAllPopups()
         }
     }, []);
+
     useEffect(() => {
         document.addEventListener("keydown", escCloseFunction, false);
         return () => {
@@ -143,6 +144,7 @@ function App() {
             closeAllPopups()
         }
     }, []);
+    
     useEffect(() => {
         document.addEventListener("mousedown", overlayCloseFunction, false);
         return () => {
