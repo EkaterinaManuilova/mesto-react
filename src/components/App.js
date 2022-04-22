@@ -138,6 +138,18 @@ function App() {
         };
     }, []);
 
+    const overlayCloseFunction = useCallback((event) => {
+        if (event.target.classList.contains('popup_opened')) {
+            closeAllPopups()
+        }
+    }, []);
+    useEffect(() => {
+        document.addEventListener("mousedown", overlayCloseFunction, false);
+        return () => {
+            document.removeEventListener("mousedown", overlayCloseFunction, false);
+        };
+    }, []);
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
 
